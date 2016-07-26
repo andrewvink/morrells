@@ -187,12 +187,11 @@ textarea.parsley-error {
     <!-- VALIDATION MESSAGES -->
     <div class="bs-callout bs-callout-warning hidden">
       <h4>Error!</h4>
-      <p>This form seems to be invalid</p>
+      <p>This form seems to be invalid, please check your information above.</p>
     </div>
 
     <div class="bs-callout bs-callout-info hidden">
       <h4>Success!</h4>
-      <p>Everything seems to be ok</p>
     </div>
 
     <p id="feedback"></p>
@@ -245,7 +244,7 @@ $('#input_form').submit(function(){
   $(this)[0].reset();
 
   // Feedback Message
-  $('#feedback').text('Thank You!');
+  $('#feedback').text('Thank You! We\'ll be in contact with you shortly to complete your booking.');
 
 });
 
