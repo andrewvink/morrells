@@ -1,0 +1,314 @@
+/*
+ :: FORMS
+------------------------------------------------ */
+form {
+  padding: 20px;
+  max-width: 500px;
+}
+
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+label .inline{
+  display: inline-block;
+}
+
+/*
+:: RADIOS & CHECKBOXES
+
+ // Radio
+ <input type="radio" name="radio-group" value="individual-value">
+ <label>Red</label>
+
+ // Checkbox
+ <input type="checkbox" name="checkbox-group" value="individual-value">
+ <label>Brown</label>
+
+
+
+/* Hide base elements */
+[type="radio"],
+[type="checkbox"] {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Position the <label> */
+[type="radio"] + label,
+[type="checkbox"] + label {
+  position: relative;
+  display: inline-block;
+  height: 17px;
+  line-height: 17px;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+/* SHARED STYLES - Radio & Checkbox - Unchecked */
+[type="radio"] + label:before,
+[type="checkbox"] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -3px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #333;
+  background-color: #fff;
+}
+
+/* RADIO - Unchecked */
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  border-radius: 50%;
+}
+
+/* RADIO - Checked */
+[type="radio"]:checked + label:after {
+  position: absolute;
+  content: '';
+  top: 3px;
+  left: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+/* CHECKBOX - Unchecked */
+[type="checkbox"]:not(:checked) + label:before {
+  /* Add styles if needed */
+}
+
+/* CHECKBOX - Checked */
+[type="checkbox"]:checked + label:after {
+ position: absolute;
+ content: "";
+ left: 7px;
+ top: 0px;
+ width: 5px;
+ height: 11px;
+ border-bottom: 3px solid #333;
+ border-right: 3px solid #333;
+ -webkit-transform: rotate(45deg);
+ transform: rotate(45deg);
+}
+
+/* SHARED STYLES - Radio & Checkbox - Disabled */
+[type="radio"]:disabled + label:before,
+[type="checkbox"]:disabled + label:before {
+  border-color: #bbb;
+  background-color: #ddd;
+}
+
+[type="radio"]:disabled + label,
+[type="checkbox"]:disabled + label {
+  color: #999;
+}
+
+
+/*
+  :: EMOJI RADIOS
+
+  // Radio
+  <input class="radio-emoji happy" type="radio" name="radio-group" id="radio-1"  />
+  <label for="radio-1">Red</label>
+
+------------------------------------------------ */
+/* Position the <label> */
+.radio-emoji + label {
+  height: 28px;
+  line-height: 28px;
+  padding-left: 40px;
+}
+
+/* EMOJI RADIO - Unchecked */
+.radio-emoji:checked + label:before,
+.radio-emoji:not(:checked) + label:before {
+  color: #333;
+  font-weight: bold;
+  font-family: monospace;
+  position: absolute;
+  line-height: 24px;
+  text-align: center;
+  font-size: 14px;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  top: 0;
+  background-color: transparent;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  border: 2px solid #333;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.happy + label:before { content: ':)'; }
+.ok + label:before { content: ':|'; }
+.sad + label:before { content: ':('; }
+
+/* EMOJI RADIO - Checked */
+.radio-emoji:checked + label:after {
+  position: absolute;
+  content: '';
+  background-color: #FFDC00;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+
+
+/*
+  :: SELECT
+
+  <div class="select">
+    <select>
+      <option>Please Select</option>
+      <option>Option</option>
+      <option>Option</option>
+    </select>
+  </div>
+
+------------------------------------------------ */
+
+/* Base elements */
+.select {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+/* SELECT - Normal State */
+.select select {
+	display: inline-block;
+	width: 100%;
+	padding: 10px 15px;
+  padding-right: 30px;
+	cursor: pointer;
+	border: 0;
+	border-radius: 0;
+	outline: 0;
+	border: 1px solid #333;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+/* SELECT - Hover */
+.select select:hover,
+.select select:focus {
+	color: #000;
+	background: rgba(0,0,0,0.05);
+}
+
+/* SELECT - Arrow */
+.select:before {
+  content: '';
+  position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+	border-width: 8px 5px 0 5px;
+	border-style: solid;
+	border-color: #333 transparent transparent transparent;
+  z-index: 1;
+}
+
+/* SELECT - Disabled */
+.select select:disabled {
+	pointer-events: none;
+	opacity: .5;
+}
+
+/*
+  :: TEXT INPUT
+
+  <label>Text Input One</label>
+  <input type="text" name="" id="">
+
+  <label>Text Input Two</label>
+  <input type="text" name="" id="">
+
+------------------------------------------------ */
+
+/* Base elements */
+input {
+	position: relative;
+	display: inline;
+	margin-bottom: 15px;
+  padding: 10px 15px;
+	border: 1px solid #333;
+}
+
+input:hover,
+input:focus {
+	color: #000;
+	background: rgba(0,0,0,0.05);
+}
+
+/* Input - Disabled */
+input:disabled {
+	pointer-events: none;
+}
+
+
+/*
+  :: TEXT AREA
+
+  <label for="name">your label</label>
+  <textarea name="name" rows="8" cols="40"></textarea>
+------------------------------------------------ */
+/* Base elements */
+textarea {
+	position: relative;
+	display: block;
+  /*inline-block for label next to textarea*/
+	margin-bottom: 15px;
+  padding: 10px 15px;
+	border: 1px solid #333;
+  vertical-align: top;
+}
+
+textarea:hover,
+textarea:focus {
+	color: #000;
+	background: rgba(0,0,0,0.05);
+}
+
+/* Text Area - Disabled */
+textarea:disabled {
+	pointer-events: none;
+}
+
+
+/* :: BUTTONS
+----------------------------------------- */
+.btn {
+	padding: 8px 16px;
+	font-size: 16px;
+}
+
+/* Ghost Button - White */
+.ghost-black {
+	color: black !important;
+	border-color: black ;
+	text-decoration: none !important;
+	background-color: transparent;
+}
+
+.ghost-black:hover {
+	color: white !important;
+	background-color: #610000;
+}
