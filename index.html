@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Google Form JS - RAW</title>
   <script src="//code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <script src="https://rawgit.com/guillaumepotier/Parsley.js/2.4.3/dist/parsley.js"></script>
   <link rel="stylesheet" href="//cdn.rawgit.com/StefanKovac/flex-layout-attribute/master/css/flex-layout-attribute.min.css">
 	<link rel="stylesheet" href="stylesheets/forms.css">
   <link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
@@ -12,7 +13,8 @@
   body{
     font-family: arial, sans-serif;
   }
-  h1,h3{
+  h1, h3{
+    margin-top: 0;
     font-family: 'Oswald', sans-serif;
   }
   form{
@@ -25,7 +27,7 @@
     height: 300px;
     background-image: url("https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/13524388_1083721491690092_5132628338229265256_n.jpg?oh=19c7f4890cc34791c4cb725d4aca2abc&oe=57E87B65");
     background-size: cover;
-    padding: 20px;
+    padding: 30px;
   }
 
   .banner .info a{
@@ -40,6 +42,70 @@ input.first-input{
 .select{
   width:auto;
 }
+
+.divider {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+
+/*
+ :: Parsely Validation
+------------------------------------------------ */
+.hidden, .hide {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+p.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+p.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+
+
   </style>
 
 </head>
@@ -55,42 +121,45 @@ input.first-input{
       <h1> DIGBY AND THE LULLABY</h1>
       <h3> LIVE @ MORRELLS / 18h00 FOR 19h00</h3>
       <h1>26 & 27 JULY 2016</h1>
+      <b>R385 PP</b>
     </div>
 
     <p class="description">Digby and the lullaby will be playing live at Morrells Boutique Venue in Jozi on Wednesday night, <br> join us for dinner and a show at this exclusive and intimate venue.</p>
-    <p class="info">011 476 9495 | <a href="mailto:info@morrels.co.za">INFO@MORRELLS.CO.ZA</a> | R385 PP</p>
+    <p class="info">011 476 9495 <span class="divider">&bull;</span> <a href="mailto:info@morrels.co.za">INFO@MORRELLS.CO.ZA</a> <span class="divider">&bull;</span> R385 PP</p>
+
+    <hr>
 
     <h1>BOOKINGS</h1>
     <div layout="row center-left">
         <div>
           <label for="">First Name</label>
-          <input class="first-input" type="text" name="entry.185084772" id="">
+          <input class="first-input" type="text" name="entry.185084772" id="" required="">
         </div>
         <div>
         <label for="">Last Name</label>
-        <input type="text" name="entry.183597309" id="" >
+        <input type="text" name="entry.183597309" id=""  required="">
         </div>
     </div>
 
     <div layout="row center-left">
       <div>
         <label for="">Email</label>
-        <input class="first-input" type="text" name="entry.1782283715" id="">
+        <input class="first-input" type="email" name="entry.1782283715" id=""  required="">
         </div>
         <div>
         <label for="">Cell Phone Number</label>
-        <input type="text" name="entry.1006199209" id="">
+        <input type="text" name="entry.1006199209" id="" >
       </div>
     </div>
     <label for="">Date</label>
     <div class="select">
-      <select name="entry.1543535897">
+      <select name="entry.1543535897"  required="">
     		<option value="26-07-2016">Wednesday, 27 July 2016</option>
     	</select>
     </div>
     <label for="">Number of Tickets</label>
     <div class="select">
-      <select name="entry.847586203" id="tickets">
+      <select name="entry.847586203" id="tickets"  required="">
         <option value="">Quantity</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -115,6 +184,17 @@ input.first-input{
     <p>Total: <span id="total"></span> </p>
     <button type="submit" class="btn ghost-black">BOOK NOW</button>
 
+    <!-- VALIDATION MESSAGES -->
+    <div class="bs-callout bs-callout-warning hidden">
+      <h4>Error!</h4>
+      <p>This form seems to be invalid</p>
+    </div>
+
+    <div class="bs-callout bs-callout-info hidden">
+      <h4>Success!</h4>
+      <p>Everything seems to be ok</p>
+    </div>
+
     <p id="feedback"></p>
 
   <!-- Stop the form from opening the default Google "Thank-you" page -->
@@ -123,6 +203,16 @@ input.first-input{
 </div>
 
 <script>
+
+
+// :: PARSLEY
+// ------------------------------------------------
+$('#input_form').parsley().on('field:validated', function() {
+  var ok = $('.parsley-error').length === 0;
+  $('.bs-callout-info').toggleClass('hidden', !ok);
+  $('.bs-callout-warning').toggleClass('hidden', ok);
+});
+
 
 
 $('#tickets').on('change',function(){
